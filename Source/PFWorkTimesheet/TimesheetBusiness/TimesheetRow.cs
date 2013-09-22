@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimesheetBusiness
 {
-    class TimesheetObject
+    class TimesheetRow
     {
 
 
@@ -49,6 +49,27 @@ namespace TimesheetBusiness
             get { return hoursWednesday; }
             set { hoursWednesday = value; }
         }
+        public string hoursThursday
+        {
+            get { return hoursThursday; }
+            set { hoursThursday = value; }
+        }
+        public string hoursFirday
+        {
+            get { return hoursFirday; }
+            set { hoursFirday = value; }
+        }
+        public string hoursSaturday
+        {
+            get { return hoursSaturday; }
+            set { hoursSaturday = value; }
+        }
+        public string hoursabc
+        {
+            get { return hoursabc; }
+            set { hoursabc = value; }
+        }
+
 
 
     }

@@ -196,6 +196,8 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="Images\PFWorkLogo_Large.png" />
+    <Content Include="Images\PFWorkLogo_Medium.png" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -228,6 +230,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Timesheet\EditTimesheet.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -300,6 +303,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Timesheet\EditTimesheet.aspx.cs">
+      <DependentUpon>EditTimesheet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Timesheet\EditTimesheet.aspx.designer.cs">
+      <DependentUpon>EditTimesheet.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

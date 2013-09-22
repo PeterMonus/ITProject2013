@@ -38,7 +38,7 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
-                    <a runat="server" href="~/">your logo here</a>
+                    <a runat="server" href="~/"><asp:Image ID="header" runat="server" ImageUrl="~/Images/PFWorkLogo_Medium.png" Width="100%" /></a>
                 </p>
             </div>
             <div class="float-right">

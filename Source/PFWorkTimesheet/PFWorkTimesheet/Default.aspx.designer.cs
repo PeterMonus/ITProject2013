@@ -11,7 +11,7 @@ namespace PFWorkTimesheet
 {
 
 
-    public partial class _Default
+    public partial class EditTimesheet
     {
     }
 }
