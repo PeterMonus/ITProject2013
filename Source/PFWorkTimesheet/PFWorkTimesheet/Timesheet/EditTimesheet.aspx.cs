@@ -13,6 +13,7 @@ namespace PFWorkTimesheet.Timesheet
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            /**
             if (!Page.IsPostBack)
             {
                 for (int j = 0; j < 4; j++)
@@ -31,6 +32,7 @@ namespace PFWorkTimesheet.Timesheet
             {
                 TableTimesheet.Rows.Add(tr);
             }
+             **/
         }
 
         protected void Button_NewRow_Click(object sender, EventArgs e)
@@ -43,6 +45,11 @@ namespace PFWorkTimesheet.Timesheet
                 CopyRow.Cells.Add(cell);
             }
             TableRows.Add(CopyRow);
+        }
+
+        protected void Button_Submit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

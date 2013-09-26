@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="83b4d340-71b7-4897-845d-543e5d426a68" ChangeDateTime="09/25/2013 13:32:44">
+    <Property Name="ElementName" Value="[dbo].[Timesheet].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Timesheet]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="iTimesheetID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="95fd7b11-bc87-465c-b837-ca12b01fc99d" ChangeDateTime="09/25/2013 13:34:58">
+    <Property Name="ElementName" Value="[dbo].[TimesheetEntry].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TimesheetEntry]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="iEntryID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="999e3d48-8d8c-4bba-b7dd-4476e15a428d" ChangeDateTime="09/25/2013 13:36:37">
+    <Property Name="ElementName" Value="[dbo].[TimesheetEntry].[sHoursWednesdat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TimesheetEntry]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="sHoursWednesday" />
+  </Operation>
+</Operations>
