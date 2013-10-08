@@ -18,19 +18,22 @@
         </p>
             
         <p>
+            <!--
             <asp:SqlDataSource
                 id="SqlTimesheetDataSource"
                 runat="server"
                 DataSourceMode="DataReader"
                 ConnectionString="<%$ ConnectionStrings:TimesheetDatabaseConnection%>"
-                SelectCommand="SELECT * FROM Timesheet">
-            </asp:SqlDataSource>
+                SelectCommand="GetTimesheetByID" SelectCommandType="StoredProcedure">
+                <SelectParameters>
+                    <asp:Parameter Name="TimesheetID" DefaultValue="1" />
+                </SelectParameters>
+            </asp:SqlDataSource>            
 
             <asp:GridView ID="TimesheetGridView" runat="server" DataSourceID="SqlTimesheetDataSource"></asp:GridView>
-
-            <!--
-            <asp:Table runat="server" ID="TableTimesheet"
-                DataSourceID="SqlTimesheetDataSource">
+            -->
+            
+            <asp:Table runat="server" ID="TableTimesheet">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell >Name</asp:TableHeaderCell>
                     <asp:TableHeaderCell >C/L</asp:TableHeaderCell>
@@ -44,7 +47,6 @@
                     <asp:TableHeaderCell >Comments</asp:TableHeaderCell>
                 </asp:TableHeaderRow>
             </asp:Table>
-            -->
         </p>
 
         <asp:Button runat="server" ID="Button_NewRow" OnClick="Button_NewRow_Click" Text="Add New Entry" />

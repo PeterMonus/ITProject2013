@@ -60,6 +60,9 @@
   <ItemGroup>
     <Build Include="StoredProcedures\GetListTimesheets.sql" />
     <Build Include="Tables\Timesheet.sql" />
+    <Build Include="StoredProcedures\GetTimesheetEntriesByID.sql" />
+    <Build Include="StoredProcedures\GetListTimesheetsByForeman.sql" />
+    <Build Include="StoredProcedures\GetTimesheetByID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TimesheetDatabase.refactorlog" />

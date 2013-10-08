@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimesheetBusiness
 {
-    class TimesheetEmail
+    public class TimesheetEmail
     {
     }
 }

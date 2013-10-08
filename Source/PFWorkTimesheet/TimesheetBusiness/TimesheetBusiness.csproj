@@ -39,10 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TimesheetListItem.cs" />
+    <Compile Include="TimesheetObject.cs" />
     <Compile Include="TimesheetBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimesheetEmail.cs" />
-    <Compile Include="TimesheetRow.cs" />
+    <Compile Include="TimesheetEntry.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimesheetDataAccess\TimesheetDataAccess.csproj">
+      <Project>{9a752cce-3716-4231-ae72-42ec1b624aef}</Project>
+      <Name>TimesheetDataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

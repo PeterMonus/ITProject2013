@@ -230,6 +230,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Timesheet\AllTimesheets.aspx" />
     <Content Include="Timesheet\EditTimesheet.aspx" />
     <Content Include="Timesheet\MyTimesheets.aspx" />
     <Content Include="Web.config" />
@@ -305,6 +306,13 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="Timesheet\AllTimesheets.aspx.cs">
+      <DependentUpon>AllTimesheets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Timesheet\AllTimesheets.aspx.designer.cs">
+      <DependentUpon>AllTimesheets.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Timesheet\EditTimesheet.aspx.cs">
       <DependentUpon>EditTimesheet.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -334,6 +342,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimesheetBusiness\TimesheetBusiness.csproj">
+      <Project>{940046b0-9d18-4870-a890-cd52f199a237}</Project>
+      <Name>TimesheetBusiness</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

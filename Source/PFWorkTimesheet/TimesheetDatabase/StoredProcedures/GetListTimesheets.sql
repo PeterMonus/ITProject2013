@@ -1,9 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[GetListTimesheets]
-	@iTimesheetID INT
 AS
 
 BEGIN
-SELECT iTimesheetID FROM Timesheet
+SELECT iTimesheetID, ForemanID, DateWeekEnding, DateSubmitted FROM Timesheet
 END
 
 GO

@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using TimesheetBusiness;
+
+namespace PFWorkTimesheet.Timesheet
+{
+    public partial class AllTimesheets : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            TimesheetBusinessLogic TBL = new TimesheetBusinessLogic();
+
+            List<TimesheetListItem> Timesheets = TBL.GetTimesheetList();
+
+            foreach (TimesheetListItem sheet in Timesheets)
+            {
+                TableRow tr = new TableRow();
+
+                TableCell tc0 = new TableCell();
+                HyperLink hl = new HyperLink();
+                hl.Text = sheet.timesheetID;
+                hl.NavigateUrl = "EditTimesheet.aspx?ID=" + sheet.timesheetID;
+                tc0.Controls.Add(hl);
+                tr.Cells.Add(tc0);
+
+                TableCell tc1 = new TableCell();
+                tc1.Text = sheet.foremanID;
+                tr.Cells.Add(tc1);
+
+                TableCell tc2 = new TableCell();
+                tc2.Text = sheet.dateEnding;
+                tr.Cells.Add(tc2);
+
+                TableCell tc3 = new TableCell();
+                if (sheet.submitted == string.Empty)
+                    tc3.Text = "Not Submitted";
+                else
+                    tc3.Text = sheet.submitted;
+                tr.Cells.Add(tc3);
+
+                TableTimesheets.Rows.Add(tr);
+            }
+        }
+    }
+}

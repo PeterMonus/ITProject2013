@@ -12,8 +12,7 @@ namespace PFWorkTimesheet.Timesheet
         List<TableRow> TableRows = new List<TableRow>();
         
         protected void Page_Load(object sender, EventArgs e)
-        {
-            /**
+        {            
             if (!Page.IsPostBack)
             {
                 for (int j = 0; j < 4; j++)
@@ -31,8 +30,7 @@ namespace PFWorkTimesheet.Timesheet
             foreach (TableRow tr in TableRows)
             {
                 TableTimesheet.Rows.Add(tr);
-            }
-             **/
+            }            
         }
 
         protected void Button_NewRow_Click(object sender, EventArgs e)

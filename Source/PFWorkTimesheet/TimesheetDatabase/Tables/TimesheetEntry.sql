@@ -2,8 +2,8 @@
 (
 	[iEntryID] INT NOT NULL PRIMARY KEY, 
     [iTimesheetID] INT NOT NULL, 
-    [EmployeeID] NCHAR(10) NULL, 
-    [sEmployeeName] NCHAR(10) NULL, 
+    [EmployeeID] NCHAR(10) NULL,
+	[sEmployeeName] NCHAR(10) NULL,
     [cEmployeeType] NCHAR(10) NULL, 
     [sHoursWednesday] NCHAR(10) NULL, 
     [sHoursThursday] NCHAR(10) NULL, 
