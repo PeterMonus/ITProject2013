@@ -23,8 +23,9 @@ namespace PFWorkTimesheet.Timesheet
                 TableCell tc0 = new TableCell();
                 HyperLink hl = new HyperLink();
                 hl.Text = sheet.timesheetID;
+                hl.Style["font-weight"] = "bold"; 
                 hl.NavigateUrl = "EditTimesheet.aspx?ID=" + sheet.timesheetID;
-                tc0.Controls.Add(hl);
+                tc0.Controls.Add(hl); 
                 tr.Cells.Add(tc0);
 
                 TableCell tc1 = new TableCell();

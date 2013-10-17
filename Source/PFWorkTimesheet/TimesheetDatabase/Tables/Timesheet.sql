@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Timesheet]
 (
-	[iTimesheetID] INT NOT NULL PRIMARY KEY, 
+	[iTimesheetID] INT NOT NULL PRIMARY KEY IDENTITY, 
     [ForemanID] NCHAR(10) NULL, 
     [DateSubmitted] DATETIME NULL, 
     [DateWeekEnding] DATE NOT NULL, 

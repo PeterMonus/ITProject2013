@@ -9,6 +9,12 @@ namespace TimesheetBusiness
 {
     public class TimesheetBusinessLogic
     {
+        public void AddTimesheetEntry(string timesheetID)
+        {
+            TimesheetDA TDA = new TimesheetDA();
+            TDA.AddNewTimesheetEntry(timesheetID);
+        }
+
         public List<TimesheetListItem> GetTimesheetList()
         {
             List<TimesheetListItem> Timesheets = new List<TimesheetListItem>();
@@ -57,12 +63,22 @@ namespace TimesheetBusiness
                 TimesheetEntry TSE = new TimesheetEntry();
 
                 TSE.entryID = words[0];
+                TSE.timesheetID = words[1];
+                TSE.employeeID = words[2];
+                TSE.employeeName = words[3];
+                TSE.employeeType = words[4];
+                TSE.hoursWednesday = words[5];
+                TSE.hoursThursday = words[6];
+                TSE.hoursFirday = words[7];
+                TSE.hoursSaturday = words[8];
+                TSE.hoursSunday = words[9];
+                TSE.hoursMonday = words[10];
+                TSE.hoursTuesday = words[11];
+                TSE.comments = words[12];
 
-                //TSO.Entries.Add
-
-                
+                TSO.Entries.Add(TSE);                
             }
-            return null;
+            return TSO;
         }
     }
 }

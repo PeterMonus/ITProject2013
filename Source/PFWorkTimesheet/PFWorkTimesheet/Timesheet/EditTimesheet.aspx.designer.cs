@@ -13,6 +13,15 @@ namespace PFWorkTimesheet.Timesheet {
     public partial class EditTimesheet {
         
         /// <summary>
+        /// TitleLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TitleLabel;
+        
+        /// <summary>
         /// Textbox_Status control.
         /// </summary>
         /// <remarks>

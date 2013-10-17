@@ -2,7 +2,7 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <hgroup class="title">
         <h1><%: Title %>.</h1>
-        <h2>Week ending 01/10/2013</h2>
+        <h2><asp:Label ID="TitleLabel" runat="server" Text="No Timesheet Found"></asp:Label></h2>
     </hgroup>
 
     <article>
@@ -33,9 +33,9 @@
             <asp:GridView ID="TimesheetGridView" runat="server" DataSourceID="SqlTimesheetDataSource"></asp:GridView>
             -->
             
-            <asp:Table runat="server" ID="TableTimesheet">
+            <asp:Table runat="server" ID="TableTimesheet" Visible="false">
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell >Name</asp:TableHeaderCell>
+                    <asp:TableHeaderCell Width ="200px" >Name</asp:TableHeaderCell>
                     <asp:TableHeaderCell >C/L</asp:TableHeaderCell>
                     <asp:TableHeaderCell >Wed</asp:TableHeaderCell>
                     <asp:TableHeaderCell >Thu</asp:TableHeaderCell>
@@ -44,13 +44,13 @@
                     <asp:TableHeaderCell >Sun</asp:TableHeaderCell>
                     <asp:TableHeaderCell >Mon</asp:TableHeaderCell>
                     <asp:TableHeaderCell >Tue</asp:TableHeaderCell>
-                    <asp:TableHeaderCell >Comments</asp:TableHeaderCell>
+                    <asp:TableHeaderCell Width ="200px" >Comments</asp:TableHeaderCell>
                 </asp:TableHeaderRow>
             </asp:Table>
         </p>
 
         <asp:Button runat="server" ID="Button_NewRow" OnClick="Button_NewRow_Click" Text="Add New Entry" />
-        <asp:Button runat="server" ID="Button_Submit" OnClick="Button_Submit_Click" Text="Sumbit" />
+        <asp:Button runat="server" ID="Button_Submit" OnClick="Button_Submit_Click" Text="Sumbit To HR" />
 
     </article>
 

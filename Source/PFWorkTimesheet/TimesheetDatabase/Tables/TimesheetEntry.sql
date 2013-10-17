@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[TimesheetEntry]
 (
-	[iEntryID] INT NOT NULL PRIMARY KEY, 
+	[iEntryID] INT NOT NULL PRIMARY KEY IDENTITY, 
     [iTimesheetID] INT NOT NULL, 
     [EmployeeID] NCHAR(10) NULL,
 	[sEmployeeName] NCHAR(10) NULL,

@@ -12,6 +12,38 @@ namespace TimesheetDataAccess
 {
     public class TimesheetDA
     {
+        /// <summary>AddNewTimesheetEntry
+        /// <para>
+        /// Input: Timesheet ID
+        /// Output: Calls database procedure to add a new timesheet entry into specified timesheet
+        /// Return: None
+        /// </para>
+        /// </summary>
+        public void AddNewTimesheetEntry(string ID)
+        {
+            SqlConnection sqlConnection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["TimesheetDatabaseConnection"].ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+
+            cmd.CommandText = "AddNewTimesheetEntry";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@TimesheetID", SqlDbType.Int).Value = int.Parse(ID);
+            cmd.Connection = sqlConnection1;
+
+            sqlConnection1.Open();
+
+            reader = cmd.ExecuteReader();
+
+            sqlConnection1.Close();
+        }
+
+        /// <summary>AddNewTimesheetEntry
+        /// <para>
+        /// Input:
+        /// Output:
+        /// Returns:
+        /// </para>
+        /// </summary>
         public List<string> GetTimesheetList()
         {
             SqlConnection sqlConnection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["TimesheetDatabaseConnection"].ConnectionString);

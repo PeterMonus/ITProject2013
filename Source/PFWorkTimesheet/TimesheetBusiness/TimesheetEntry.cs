@@ -12,11 +12,9 @@ namespace TimesheetBusiness
 
         public string timesheetID { get; set; }
 
-        public string jobsite { get; set; }
-
         public string employeeID { get; set; }
 
-        public string date { get; set; }
+        public string employeeName { get; set; }
 
         public string comments { get; set; }
 
