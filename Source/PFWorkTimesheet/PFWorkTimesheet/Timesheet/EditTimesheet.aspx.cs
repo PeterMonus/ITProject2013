@@ -11,6 +11,7 @@ namespace PFWorkTimesheet.Timesheet
     public partial class EditTimesheet : System.Web.UI.Page
     {
         TimesheetBusinessLogic TBL = new TimesheetBusinessLogic();
+        TimesheetObject Timesheet = new TimesheetObject();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,10 +20,10 @@ namespace PFWorkTimesheet.Timesheet
                 TitleLabel.Text = "No Timesheet Found";
             }
             else
-            {                
+            {
                 TableTimesheet.Visible = true;
 
-                TimesheetObject Timesheet = TBL.GetTimesheetByID(Request.QueryString["ID"]);
+                Timesheet = TBL.GetTimesheetByID(Request.QueryString["ID"]);
 
                 Textbox_Status.Text = Timesheet.submitted;
                 Textbox_Week.Text = Timesheet.weekEnding.Split(' ')[0];
@@ -49,7 +50,45 @@ namespace PFWorkTimesheet.Timesheet
         protected void Button_NewRow_Click(object sender, EventArgs e)
         {
             TBL.AddTimesheetEntry(Request.QueryString["ID"]);
-            Response.Redirect(Request.RawUrl);            
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void Button_Save_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i < TableTimesheet.Rows.Count; i++)
+            {
+                TextBox tb = (TextBox)TableTimesheet.Rows[i].Cells[0].Controls[0];
+                Timesheet.Entries[i-1].employeeName = tb.Text;
+
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[1].Controls[0];
+                Timesheet.Entries[i-1].employeeType = tb.Text;
+
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[2].Controls[0];
+                Timesheet.Entries[i-1].hoursWednesday = tb.Text;
+
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[3].Controls[0];
+                Timesheet.Entries[i-1].hoursThursday = tb.Text;
+
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[4].Controls[0];
+                Timesheet.Entries[i-1].hoursFirday = tb.Text;
+
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[5].Controls[0];
+                Timesheet.Entries[i-1].hoursSaturday = tb.Text;
+
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[6].Controls[0];
+                Timesheet.Entries[i-1].hoursSunday = tb.Text;
+
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[7].Controls[0];
+                Timesheet.Entries[i-1].hoursMonday = tb.Text;
+
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[8].Controls[0];
+                Timesheet.Entries[i-1].hoursTuesday = tb.Text;
+                
+                tb = (TextBox)TableTimesheet.Rows[i].Cells[9].Controls[0];
+                Timesheet.Entries[i-1].comments = tb.Text;
+            }
+            
+            
         }
 
         protected void Button_Submit_Click(object sender, EventArgs e)
@@ -65,7 +104,10 @@ namespace PFWorkTimesheet.Timesheet
             Button DeleteButton = new Button();
             DeleteButton.Text = "X";
             DeleteButton.ToolTip = "Delete This Row";
-            DeleteButton.OnClientClick = "DeleteRow(" + Entry.entryID + ")";
+
+            DeleteButton.Command += DeleteRow;
+            DeleteButton.CommandName = "DeleteRow";
+            DeleteButton.CommandArgument = Entry.entryID;
             DeleteCell.Controls.Add(DeleteButton);
             
             Row.Cells.Add(MakeTableCell(Entry.employeeName));
@@ -93,9 +135,14 @@ namespace PFWorkTimesheet.Timesheet
             return cell;
         }
 
-        public void DeleteRow(string ID)
+        public void DeleteRow(Object sender, EventArgs e)
         {
-
+            Button btn = (Button)sender;
+            if (btn.CommandName == "DeleteRow")
+            {
+                TBL.DeleteTimesheetEntry(btn.CommandArgument.ToString());
+                Response.Redirect(Request.RawUrl);
+            }
         }
     }
 }

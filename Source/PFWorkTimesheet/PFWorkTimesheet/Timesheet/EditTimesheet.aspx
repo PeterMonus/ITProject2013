@@ -50,6 +50,7 @@
         </p>
 
         <asp:Button runat="server" ID="Button_NewRow" OnClick="Button_NewRow_Click" Text="Add New Entry" />
+        <asp:Button runat="server" ID="Button_Save" OnClick="Button_Save_Click" Text="Save Changes" />
         <asp:Button runat="server" ID="Button_Submit" OnClick="Button_Submit_Click" Text="Sumbit To HR" />
 
     </article>

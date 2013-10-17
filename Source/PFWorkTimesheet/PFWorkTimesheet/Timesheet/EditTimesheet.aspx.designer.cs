@@ -85,6 +85,15 @@ namespace PFWorkTimesheet.Timesheet {
         protected global::System.Web.UI.WebControls.Button Button_NewRow;
         
         /// <summary>
+        /// Button_Save control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Save;
+        
+        /// <summary>
         /// Button_Submit control.
         /// </summary>
         /// <remarks>

@@ -9,17 +9,21 @@ namespace TimesheetBusiness
 {
     public class TimesheetBusinessLogic
     {
+        TimesheetDA TDA = new TimesheetDA();
+
+        public void DeleteTimesheetEntry(string entryID)
+        {            
+            TDA.DeleteTimesheetEntry(entryID);
+        }
+
         public void AddTimesheetEntry(string timesheetID)
-        {
-            TimesheetDA TDA = new TimesheetDA();
+        {            
             TDA.AddNewTimesheetEntry(timesheetID);
         }
 
         public List<TimesheetListItem> GetTimesheetList()
         {
             List<TimesheetListItem> Timesheets = new List<TimesheetListItem>();
-
-            TimesheetDA TDA = new TimesheetDA();
 
             foreach (string ts in TDA.GetTimesheetList())
             {
@@ -39,8 +43,6 @@ namespace TimesheetBusiness
 
         public TimesheetObject GetTimesheetByID(string timesheetID)
         {
-            TimesheetDA TDA = new TimesheetDA();
-
             TimesheetObject TSO = new TimesheetObject();
 
             foreach (string ts in TDA.GetTimesheetDataByID(timesheetID))

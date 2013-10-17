@@ -14,6 +14,31 @@ namespace TimesheetDataAccess
     {
         /// <summary>AddNewTimesheetEntry
         /// <para>
+        /// Input: Entry ID
+        /// Output: Calls database procedure to delete a timesheet entry
+        /// Return: None
+        /// </para>
+        /// </summary>
+        public void DeleteTimesheetEntry(string ID)
+        {
+            SqlConnection sqlConnection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["TimesheetDatabaseConnection"].ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+
+            cmd.CommandText = "DeleteTimesheetEntry";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@EntryID", SqlDbType.Int).Value = int.Parse(ID);
+            cmd.Connection = sqlConnection1;
+
+            sqlConnection1.Open();
+
+            reader = cmd.ExecuteReader();
+
+            sqlConnection1.Close();
+        }
+
+        /// <summary>AddNewTimesheetEntry
+        /// <para>
         /// Input: Timesheet ID
         /// Output: Calls database procedure to add a new timesheet entry into specified timesheet
         /// Return: None
