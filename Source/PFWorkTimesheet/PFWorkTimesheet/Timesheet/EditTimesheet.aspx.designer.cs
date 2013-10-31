@@ -22,6 +22,15 @@ namespace PFWorkTimesheet.Timesheet {
         protected global::System.Web.UI.WebControls.Label TitleLabel;
         
         /// <summary>
+        /// TableTimesheetInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TableTimesheetInfo;
+        
+        /// <summary>
         /// Textbox_Status control.
         /// </summary>
         /// <remarks>
@@ -49,22 +58,13 @@ namespace PFWorkTimesheet.Timesheet {
         protected global::System.Web.UI.WebControls.TextBox Textbox_Subcontractor;
         
         /// <summary>
-        /// SqlTimesheetDataSource control.
+        /// TextBox_Jobsite control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlTimesheetDataSource;
-        
-        /// <summary>
-        /// TimesheetGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView TimesheetGridView;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Jobsite;
         
         /// <summary>
         /// TableTimesheet control.

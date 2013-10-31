@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[GetListTimesheetsByForeman]
-	@sForemanID NCHAR
+	@sForemanID NVARCHAR(50)
 AS
 
 BEGIN

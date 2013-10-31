@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* 
+ * FileName:    AllTimesheets.aspx.cs
+ * Author:      Peter Monus
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,14 +37,14 @@ namespace PFWorkTimesheet.Timesheet
                 tr.Cells.Add(tc1);
 
                 TableCell tc2 = new TableCell();
-                tc2.Text = sheet.dateEnding;
+                tc2.Text = sheet.dateEnding.Split(' ')[0];
                 tr.Cells.Add(tc2);
 
                 TableCell tc3 = new TableCell();
                 if (sheet.submitted == string.Empty)
                     tc3.Text = "Not Submitted";
                 else
-                    tc3.Text = sheet.submitted;
+                    tc3.Text = sheet.submitted.Split(' ')[0];
                 tr.Cells.Add(tc3);
 
                 TableTimesheets.Rows.Add(tr);

@@ -1,6 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[AddNewTImesheet]
-	@param1 int = 0,
-	@param2 int
+	@Foreman NVARCHAR(50),
+	@WeekEnding DATE
 AS
-	SELECT @param1, @param2
-RETURN 0
+
+BEGIN
+
+INSERT INTO [Timesheet]([DateWeekEnding],[ForemanID]) VALUES (@WeekEnding, @Foreman)
+
+SELECT SCOPE_IDENTITY() AS NewID
+
+END
+

@@ -67,6 +67,7 @@
     <Build Include="StoredProcedures\DeleteTimesheetEntry.sql" />
     <Build Include="StoredProcedures\UpdateTimesheetEntryByID.sql" />
     <Build Include="StoredProcedures\AddNewTImesheet.sql" />
+    <Build Include="StoredProcedures\UpdateTimesheetByID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TimesheetDatabase.refactorlog" />

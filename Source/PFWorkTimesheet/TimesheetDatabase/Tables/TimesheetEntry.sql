@@ -2,15 +2,15 @@
 (
 	[iEntryID] INT NOT NULL PRIMARY KEY IDENTITY, 
     [iTimesheetID] INT NOT NULL, 
-    [EmployeeID] NCHAR(10) NULL,
-	[sEmployeeName] NCHAR(10) NULL,
-    [cEmployeeType] NCHAR(10) NULL, 
-    [sHoursWednesday] NCHAR(10) NULL, 
-    [sHoursThursday] NCHAR(10) NULL, 
-    [sHoursFriday] NCHAR(10) NULL, 
-    [sHoursSaturday] NCHAR(10) NULL, 
-    [sHoursSunday] NCHAR(10) NULL, 
-    [sHoursMonday] NCHAR(10) NULL, 
-    [sHoursTuesday] NCHAR(10) NULL, 
-    [sComments] NCHAR(10) NULL
+    [EmployeeID] NVARCHAR(50) NULL,
+	[sEmployeeName] NVARCHAR(50) NULL,
+    [cEmployeeType] NVARCHAR(50) NULL, 
+    [sHoursWednesday] NVARCHAR(50) NULL, 
+    [sHoursThursday] NVARCHAR(50) NULL, 
+    [sHoursFriday] NVARCHAR(50) NULL, 
+    [sHoursSaturday] NVARCHAR(50) NULL, 
+    [sHoursSunday] NVARCHAR(50) NULL, 
+    [sHoursMonday] NVARCHAR(50) NULL, 
+    [sHoursTuesday] NVARCHAR(50) NULL, 
+    [sComments] NVARCHAR(50) NULL
 )
