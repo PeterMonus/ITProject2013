@@ -15,6 +15,47 @@ namespace TimesheetBusiness
     public class TimesheetBusinessLogic
     {
         TimesheetDA TDA = new TimesheetDA();
+        LevesysDA LDA = new LevesysDA();
+
+        /// <summary>SubmitTimesheet
+        /// <para>
+        /// Input: None
+        /// Output: Gets Employees from Levesys
+        /// Return: string list of employees: Firstname Lastname
+        /// </para>
+        /// </summary>
+        public void SubmitTimesheet(TimesheetObject Timesheet)
+        {
+            TimesheetEmail TE = new TimesheetEmail();
+            TE.SendEmail(Timesheet);
+        }
+          
+
+        /// <summary>GetEmployees
+        /// <para>
+        /// Input: None
+        /// Output: Gets Employees from Levesys
+        /// Return: string list of employees: Firstname Lastname
+        /// </para>
+        /// </summary>
+        public List<string> GetEmployees()
+        {
+            List<string> Employees = LDA.GetEmployeeList();
+            return Employees;
+        }
+
+        /// <summary>GetJobsites
+        /// <para>
+        /// Input: None
+        /// Output: Gets Jobsites from Levesys
+        /// Return: string list of jobsites
+        /// </para>
+        /// </summary>
+        public List<string> GetJobsites()
+        {
+            List<string> Jobsites = LDA.GetJobsiteList();
+            return Jobsites;
+        }
 
         /// <summary>AddNewTimesheet
         /// <para>
@@ -102,6 +143,7 @@ namespace TimesheetBusiness
                 sheet.foremanID = words[1].Trim();
                 sheet.dateEnding = words[2].Trim();
                 sheet.submitted = words[3].Trim();
+                sheet.jobsite = words[4].Trim();
 
                 Timesheets.Add(sheet);
             }
@@ -129,6 +171,7 @@ namespace TimesheetBusiness
                 sheet.foremanID = words[1].Trim();
                 sheet.dateEnding = words[2].Trim();
                 sheet.submitted = words[3].Trim();
+                sheet.jobsite = words[4].Trim();
 
                 Timesheets.Add(sheet);
             }
@@ -180,7 +223,7 @@ namespace TimesheetBusiness
                 TSE.hoursSunday = words[9].Trim();
                 TSE.hoursMonday = words[10].Trim();
                 TSE.hoursTuesday = words[11].Trim();
-                TSE.comments = words[12].Trim().Trim();
+                TSE.comments = words[12].Trim();
 
                 TSO.Entries.Add(TSE);                
             }

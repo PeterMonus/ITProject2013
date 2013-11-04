@@ -40,9 +40,9 @@ namespace PFWorkTimesheet.Timesheet
                     tc0.Controls.Add(hl);
                     tr.Cells.Add(tc0);
 
-                    //Column 2: Foreman ID
+                    //Column 2: Jobsite
                     TableCell tc1 = new TableCell();
-                    tc1.Text = sheet.foremanID;
+                    tc1.Text = sheet.jobsite;
                     tr.Cells.Add(tc1);
 
                     //Column 3: Date Ending
@@ -67,6 +67,11 @@ namespace PFWorkTimesheet.Timesheet
         {
             //Create new timesheet with selected foreman and date ending
             int NewTimesheetID = TBL.AddNewTimesheet(User.Identity.Name, DateTime.Parse(DDL_WeekEnding.SelectedItem.Text));
+
+            //Add three new entries to new timesheet
+            for (int i=1 ; i<=3 ; i++)
+                TBL.AddTimesheetEntry(NewTimesheetID.ToString());
+
             //Redirect user to edit new timesheet
             Response.Redirect("EditTimesheet.aspx?ID=" + NewTimesheetID.ToString());
         }

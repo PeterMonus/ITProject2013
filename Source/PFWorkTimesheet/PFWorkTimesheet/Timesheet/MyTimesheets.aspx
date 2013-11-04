@@ -11,7 +11,7 @@
         <asp:Table runat="server" ID="TableTimesheets" Width="100%">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell >Timesheet ID</asp:TableHeaderCell>
-                    <asp:TableHeaderCell >Foreman ID</asp:TableHeaderCell>
+                    <asp:TableHeaderCell >Jobsite</asp:TableHeaderCell>
                     <asp:TableHeaderCell >Week Ending</asp:TableHeaderCell>
                     <asp:TableHeaderCell >Date Submitted</asp:TableHeaderCell>
                 </asp:TableHeaderRow>

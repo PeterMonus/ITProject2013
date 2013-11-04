@@ -3,7 +3,8 @@
 AS
 
 BEGIN
-SELECT  iTimesheetID, ForemanID, DateWeekEnding, DateSubmitted FROM Timesheet WHERE ForemanID = @sForemanID
+SELECT  iTimesheetID, ForemanID, DateWeekEnding, DateSubmitted, sJobSite FROM Timesheet WHERE ForemanID = @sForemanID
+ORDER BY iTimesheetID DESC
 END
 
 GO

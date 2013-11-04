@@ -21,7 +21,7 @@ namespace PFWorkTimesheet.Timesheet
         {            
             int isNumber;
 
-            //If query string is empty (?ID=1234 at end of URL) is empty or not a number then return "No Timesheet Found"
+            //If query string (?ID=1234 at end of URL) is empty or not a number then return "No Timesheet Found"
             if (string.IsNullOrEmpty(Request.QueryString["ID"]) || !int.TryParse(Request.QueryString["ID"], out isNumber))
             {
                 TitleLabel.Text = "No Timesheet Found";
@@ -38,6 +38,7 @@ namespace PFWorkTimesheet.Timesheet
                 //Timesheet was found and info was returned
                 else
                 {
+
                     if (!IsPostBack)
                     {
                         //Displays all the UI controls
@@ -129,11 +130,15 @@ namespace PFWorkTimesheet.Timesheet
         protected void Button_Save_Click(object sender, EventArgs e)
         {
             SaveAllChanges();
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void Button_Submit_Click(object sender, EventArgs e)
         {
-
+            Timesheet.submitted = DateTime.Now.ToString();
+            SaveAllChanges();
+            TBL.SubmitTimesheet(Timesheet);            
+            Response.Redirect(Request.RawUrl);
         }
 
         public TableRow MakeTableRow(TimesheetEntry Entry)

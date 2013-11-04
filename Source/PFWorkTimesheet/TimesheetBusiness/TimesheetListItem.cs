@@ -19,6 +19,8 @@ namespace TimesheetBusiness
         public string dateEnding { get; set; }
 
         public string submitted { get; set; }
+
+        public string jobsite { get; set; }
         
     }
 }

@@ -1,5 +1,5 @@
 ﻿/* 
- * FileName:    Timesheet DA.cs
+ * FileName:    TimesheetDA.cs
  * Author:      Peter Monus
  */
 using System;
@@ -215,10 +215,11 @@ namespace TimesheetDataAccess
             while (reader.Read())
             {
                 Timesheets.Add(
-                    reader[0].ToString() + ";" + 
-                    reader[1].ToString() + ";" + 
-                    reader[2].ToString() + ";" + 
-                    reader[3].ToString());
+                    reader[0].ToString() + ";" +
+                    reader[1].ToString() + ";" +
+                    reader[2].ToString() + ";" +
+                    reader[3].ToString() + ";" +
+                    reader[4].ToString());
             }
 
             sqlConnection1.Close();
@@ -256,7 +257,8 @@ namespace TimesheetDataAccess
                     reader[0].ToString() + ";" +
                     reader[1].ToString() + ";" +
                     reader[2].ToString() + ";" +
-                    reader[3].ToString());
+                    reader[3].ToString() + ";" +
+                    reader[4].ToString());
             }
 
             sqlConnection1.Close();
