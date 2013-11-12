@@ -31,7 +31,7 @@ namespace TimesheetDataAccess
 
             cmd.CommandText = "AddNewTimesheet";
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@Foreman", SqlDbType.Int).Value = int.Parse(Foreman);
+            cmd.Parameters.Add("@Foreman", SqlDbType.NVarChar).Value = Foreman;
             cmd.Parameters.Add("@WeekEnding", SqlDbType.DateTime).Value = WeekEnding;
 
             cmd.Connection = sqlConnection1;
@@ -242,7 +242,7 @@ namespace TimesheetDataAccess
 
             cmd.CommandText = "GetListTimesheetsByForeman";
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@sForemanID", SqlDbType.NVarChar).Value = int.Parse(ForemanID);
+            cmd.Parameters.Add("@sForemanID", SqlDbType.NVarChar).Value = ForemanID;
             cmd.Connection = sqlConnection1;
 
             sqlConnection1.Open();

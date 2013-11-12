@@ -31,22 +31,22 @@ namespace PFWorkTimesheet.Timesheet {
         protected global::System.Web.UI.WebControls.Table TableTimesheetInfo;
         
         /// <summary>
-        /// Textbox_Status control.
+        /// Label_Status control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox_Status;
+        protected global::System.Web.UI.WebControls.Label Label_Status;
         
         /// <summary>
-        /// Textbox_Week control.
+        /// Label_Week control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox_Week;
+        protected global::System.Web.UI.WebControls.Label Label_Week;
         
         /// <summary>
         /// Textbox_Subcontractor control.
@@ -65,6 +65,15 @@ namespace PFWorkTimesheet.Timesheet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox_Jobsite;
+        
+        /// <summary>
+        /// TextBox_Jobsite_AutoCompleteExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender TextBox_Jobsite_AutoCompleteExtender;
         
         /// <summary>
         /// TableTimesheet control.
@@ -101,5 +110,14 @@ namespace PFWorkTimesheet.Timesheet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_Submit;
+        
+        /// <summary>
+        /// MessageLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MessageLabel;
     }
 }

@@ -94,7 +94,7 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 1400px;
 }
 
 #body {
@@ -447,6 +447,7 @@ fieldset {
         margin-right: 4px;
     }
 
+
 /* info and errors */
 .message-info {
     border: 1px solid;
@@ -513,7 +514,7 @@ table {
 th {
 	font-size: 1.2em;
     text-align: left;
-    border: 1px;
+    border: 0px;
     padding-left: 0;
 }
 
@@ -555,7 +556,7 @@ th {
 	}
 
 td {
-    padding: 0.25em 2em 0.25em 0em;
+    padding: 0.15em 1em 0.15em 0em;
     border: medium;
 }
 
@@ -728,8 +729,8 @@ tr.pager td {
         padding: 10px 0;
     }
 
-        footer p {
-            margin: 0;
-        }
-
+    footer p 
+    {
+        margin: 0;
+    }
 /* END: Mobile Styles */

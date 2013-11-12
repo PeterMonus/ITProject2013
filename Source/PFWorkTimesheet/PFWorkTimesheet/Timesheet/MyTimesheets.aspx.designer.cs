@@ -13,6 +13,33 @@ namespace PFWorkTimesheet.Timesheet {
     public partial class MyTimesheets {
         
         /// <summary>
+        /// Table1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table Table1;
+        
+        /// <summary>
+        /// Textbox_DateWeekEnding control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Textbox_DateWeekEnding;
+        
+        /// <summary>
+        /// Calender_DateWeekEnding control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender Calender_DateWeekEnding;
+        
+        /// <summary>
         /// Button_NewTimesheet control.
         /// </summary>
         /// <remarks>
@@ -22,13 +49,13 @@ namespace PFWorkTimesheet.Timesheet {
         protected global::System.Web.UI.WebControls.Button Button_NewTimesheet;
         
         /// <summary>
-        /// DDL_WeekEnding control.
+        /// Label_Error control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDL_WeekEnding;
+        protected global::System.Web.UI.WebControls.Label Label_Error;
         
         /// <summary>
         /// TableTimesheets control.

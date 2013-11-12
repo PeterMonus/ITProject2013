@@ -19,11 +19,9 @@ namespace PFWorkTimesheet.Timesheet
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            FillDropDownList();
-
             if (User.Identity.IsAuthenticated)
             {
-                List<TimesheetListItem> Timesheets = TBL.GetTimesheetList(User.Identity.Name);
+                List<TimesheetListItem> Timesheets = TBL.GetTimesheetList(User.Identity.Name.ToLower());
 
                 //Populate table of list of timesheets
                 foreach (TimesheetListItem sheet in Timesheets)
@@ -34,7 +32,7 @@ namespace PFWorkTimesheet.Timesheet
                     //Column 1: Timesheet ID is link to edit timesheet page for timesheet
                     TableCell tc0 = new TableCell();
                     HyperLink hl = new HyperLink();
-                    hl.Text = sheet.timesheetID;
+                    hl.Text = "TS-" + sheet.timesheetID;
                     hl.Style["font-weight"] = "bold";
                     hl.NavigateUrl = "EditTimesheet.aspx?ID=" + sheet.timesheetID;
                     tc0.Controls.Add(hl);
@@ -61,36 +59,39 @@ namespace PFWorkTimesheet.Timesheet
                     TableTimesheets.Rows.Add(tr);
                 }
             }
+            else
+            {
+                //If not logged in redirect to login page
+                Response.Redirect("~/Account/Login.aspx");
+            }
         }
 
         protected void Button_NewTimesheet_Click(object sender, EventArgs e)
         {
             //Create new timesheet with selected foreman and date ending
-            int NewTimesheetID = TBL.AddNewTimesheet(User.Identity.Name, DateTime.Parse(DDL_WeekEnding.SelectedItem.Text));
+            DateTime SelectedDate;
+            if (DateTime.TryParse(Textbox_DateWeekEnding.Text, out SelectedDate))
+            {
+                if (SelectedDate.DayOfWeek != DayOfWeek.Tuesday)
+                {
+                    Label_Error.Text = "Please select a Tuesday";
+                }
+                else
+                {
+                    int NewTimesheetID = TBL.AddNewTimesheet(User.Identity.Name.ToLower(), SelectedDate);
 
-            //Add three new entries to new timesheet
-            for (int i=1 ; i<=3 ; i++)
-                TBL.AddTimesheetEntry(NewTimesheetID.ToString());
+                    //Add three new entries to new timesheet
+                    for (int i = 1; i <= 3; i++)
+                        TBL.AddTimesheetEntry(NewTimesheetID.ToString());
 
-            //Redirect user to edit new timesheet
-            Response.Redirect("EditTimesheet.aspx?ID=" + NewTimesheetID.ToString());
-        }
-
-        protected void FillDropDownList()
-        {
-            DateTime today = DateTime.Today;
-            // Finds next tuesday or today if today is tuesday
-            int daysUntilTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + 7) % 7;
-            DateTime nextTuesday = today.AddDays(daysUntilTuesday);
-
-            //Adds next 4 tuesdays to dropdown
-            DDL_WeekEnding.Items.Add(nextTuesday.Date.ToString().Split(' ')[0]);
-            nextTuesday = nextTuesday.AddDays(7);
-            DDL_WeekEnding.Items.Add(nextTuesday.Date.ToString().Split(' ')[0]);
-            nextTuesday = nextTuesday.AddDays(7);
-            DDL_WeekEnding.Items.Add(nextTuesday.Date.ToString().Split(' ')[0]);
-            nextTuesday = nextTuesday.AddDays(7);
-            DDL_WeekEnding.Items.Add(nextTuesday.Date.ToString().Split(' ')[0]);
+                    //Redirect user to edit new timesheet
+                    Response.Redirect("EditTimesheet.aspx?ID=" + NewTimesheetID.ToString());
+                }
+            }
+            else
+            {
+                Label_Error.Text = "Please select a Tuesday";
+            }
         }
     }
 }

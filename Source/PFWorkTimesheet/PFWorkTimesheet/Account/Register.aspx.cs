@@ -14,6 +14,22 @@ namespace PFWorkTimesheet.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             RegisterUser.ContinueDestinationPageUrl = Request.QueryString["ReturnUrl"];
+
+            //If no admin acount created yet, get user to make one.
+            if (Membership.GetUser("Admin") == null)
+            {
+                RegisterUser.UserName = "Admin";
+            }
+            //If use is Admin, allow user to create accounts
+            else if (User.Identity.Name.ToLower() == "admin")
+            {
+                //do nothing
+            }
+            //If there is an admin account but is not logged in, redirect to login page.
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void RegisterUser_CreatedUser(object sender, EventArgs e)

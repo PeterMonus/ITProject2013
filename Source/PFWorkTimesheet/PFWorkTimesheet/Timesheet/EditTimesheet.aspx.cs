@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
 using TimesheetBusiness;
 
 namespace PFWorkTimesheet.Timesheet
@@ -17,60 +18,80 @@ namespace PFWorkTimesheet.Timesheet
         TimesheetBusinessLogic TBL = new TimesheetBusinessLogic();
         TimesheetObject Timesheet = new TimesheetObject();
 
+        string NextMessage = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {            
             int isNumber;
 
+            if (User.Identity.IsAuthenticated)
+            {
             //If query string (?ID=1234 at end of URL) is empty or not a number then return "No Timesheet Found"
-            if (string.IsNullOrEmpty(Request.QueryString["ID"]) || !int.TryParse(Request.QueryString["ID"], out isNumber))
-            {
-                TitleLabel.Text = "No Timesheet Found";
-            }
-            else
-            {
-                Timesheet = TBL.GetTimesheetByID(Request.QueryString["ID"]);
-
-                //If query was a number but no timesheet was returned then "No Timesheet Found"
-                if (string.IsNullOrEmpty(Timesheet.timesheetID))
+                if (string.IsNullOrEmpty(Request.QueryString["ID"]) || !int.TryParse(Request.QueryString["ID"], out isNumber))
                 {
                     TitleLabel.Text = "No Timesheet Found";
                 }
-                //Timesheet was found and info was returned
                 else
                 {
+                    Timesheet = TBL.GetTimesheetByID(Request.QueryString["ID"]);
 
-                    if (!IsPostBack)
+                    if (User.Identity.Name.ToLower() == Timesheet.foremanID || User.Identity.Name.ToLower() == "admin")
                     {
-                        //Displays all the UI controls
-                        TableTimesheetInfo.Visible = true;
-                        TableTimesheet.Visible = true;
-
-                        TableTimesheet.Visible = true;
-                        Button_Submit.Visible = true;
-                        Button_NewRow.Visible = true;
-                        Button_Save.Visible = true;
-
-                        //Fills textboxes with information
-                        if (Timesheet.submitted == string.Empty)
-                            Textbox_Status.Text = "Not Submitted";
+                        //If query was a number but no timesheet was returned then "No Timesheet Found"
+                        if (string.IsNullOrEmpty(Timesheet.timesheetID))
+                        {
+                            TitleLabel.Text = "No Timesheet Found";
+                        }
+                        //Timesheet was found and info was returned
                         else
-                            Textbox_Status.Text = Timesheet.submitted;
+                        {
+                            if (!IsPostBack)
+                            {
+                                //Displays all the UI controls
+                                TableTimesheetInfo.Visible = true;
+                                TableTimesheet.Visible = true;
 
-                        Textbox_Status.Text = Timesheet.submitted;
-                        Textbox_Week.Text = Timesheet.weekEnding.Split(' ')[0];
-                        Textbox_Subcontractor.Text = Timesheet.subcontractor;
-                        TextBox_Jobsite.Text = Timesheet.jobsite;
+                                TableTimesheet.Visible = true;
+                                Button_Submit.Visible = true;
+                                Button_NewRow.Visible = true;
+                                Button_Save.Visible = true;
+                                
+                            }
+                            //Message box
+                            MessageLabel.Text = Request.QueryString["MESSAGE"];
 
-                        TitleLabel.Text = "Ending Tuesday, " + Timesheet.weekEnding.Split(' ')[0];
+                            //Fills textboxes with information
+                            if (Timesheet.submitted == string.Empty)
+                                Label_Status.Text = "Not Submitted";
+                            else
+                                Label_Status.Text = "Submitted on: " + Timesheet.submitted;
+
+                            //Fill jobsite combobox with jobsite
+                            //TextBox_Jobsite.Items.AddRange(TBL.GetJobsites().Select(s => new ListItem(s)).ToArray());
+
+                            Label_Week.Text = Timesheet.weekEnding.Split(' ')[0];
+                            Textbox_Subcontractor.Text = Timesheet.subcontractor;
+                            TextBox_Jobsite.Text = Timesheet.jobsite;
+
+                            TitleLabel.Text = "Ending Tuesday, " + Timesheet.weekEnding.Split(' ')[0];
+
+                            //Add row for each timesheet entry
+                            foreach (TimesheetEntry TE in Timesheet.Entries)
+                            {
+                                TableTimesheet.Rows.Add(MakeTableRow(TE));
+                            }
+                        }                            
                     }
-
-                    //Add row for each timesheet entry
-                    foreach (TimesheetEntry TE in Timesheet.Entries)
+                    else
                     {
-                        TableTimesheet.Rows.Add(MakeTableRow(TE));
+                        TitleLabel.Text = "No Timesheet Found";
                     }
                 }
-                
+            }
+            else
+            {
+                //If not logged in redirect to login page
+                Response.Redirect("../Account/Login.aspx");
             }
         }
 
@@ -80,7 +101,11 @@ namespace PFWorkTimesheet.Timesheet
             TBL.AddTimesheetEntry(Request.QueryString["ID"]);
             //Save any changes and refresh page
             SaveAllChanges();
-            Response.Redirect(Request.RawUrl);
+            var nameValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+            nameValues.Set("MESSAGE", "Added new row");
+            string url = Request.Url.AbsolutePath;
+            string updatedQueryString = "?" + nameValues.ToString();
+            Response.Redirect(url + updatedQueryString);
         }
 
         protected void SaveAllChanges()
@@ -125,20 +150,43 @@ namespace PFWorkTimesheet.Timesheet
             }
 
             TBL.UpdateTimesheet(Timesheet);
+            MessageLabel.Text = "Changes Saved Successfully";
         }
 
         protected void Button_Save_Click(object sender, EventArgs e)
         {
             SaveAllChanges();
-            Response.Redirect(Request.RawUrl);
+            var nameValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+            nameValues.Set("MESSAGE", "Successfully Saved Changes");
+            string url = Request.Url.AbsolutePath;
+            string updatedQueryString = "?" + nameValues.ToString();
+            Response.Redirect(url + updatedQueryString);
         }
 
         protected void Button_Submit_Click(object sender, EventArgs e)
         {
-            Timesheet.submitted = DateTime.Now.ToString();
-            SaveAllChanges();
-            TBL.SubmitTimesheet(Timesheet);            
-            Response.Redirect(Request.RawUrl);
+            try
+            {
+                Timesheet.submitted = DateTime.Now.ToString();
+                SaveAllChanges();
+                TBL.SubmitTimesheet(Timesheet);
+            }
+            catch
+            {
+                var nameValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+                nameValues.Set("MESSAGE", "An error occured while submitting timesheet. Try again later.");
+                string url = Request.Url.AbsolutePath;
+                string updatedQueryString = "?" + nameValues.ToString();
+                Response.Redirect(url + updatedQueryString);
+            }
+            finally
+            {
+                var nameValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+                nameValues.Set("MESSAGE", "Successfully Submitted Timesheet");
+                string url = Request.Url.AbsolutePath;
+                string updatedQueryString = "?" + nameValues.ToString();
+                Response.Redirect(url + updatedQueryString);
+            }
         }
 
         public TableRow MakeTableRow(TimesheetEntry Entry)
@@ -157,27 +205,44 @@ namespace PFWorkTimesheet.Timesheet
             
             //Makes the row
             //Each column in the row has a textbox with the relevant data
-            Row.Cells.Add(MakeTableCell(Entry.employeeName));
-            Row.Cells.Add(MakeTableCell(Entry.employeeType));
-            Row.Cells.Add(MakeTableCell(Entry.hoursWednesday));
-            Row.Cells.Add(MakeTableCell(Entry.hoursThursday));
-            Row.Cells.Add(MakeTableCell(Entry.hoursFirday));
-            Row.Cells.Add(MakeTableCell(Entry.hoursSaturday));
-            Row.Cells.Add(MakeTableCell(Entry.hoursSunday));
-            Row.Cells.Add(MakeTableCell(Entry.hoursMonday));
-            Row.Cells.Add(MakeTableCell(Entry.hoursTuesday));
-            Row.Cells.Add(MakeTableCell(Entry.comments));
+            Row.Cells.Add(MakeEmployeeCell(Entry.employeeName, 50));
+            Row.Cells.Add(MakeTableCell(Entry.employeeType, 1));
+            Row.Cells.Add(MakeTableCell(Entry.hoursWednesday, 4));
+            Row.Cells.Add(MakeTableCell(Entry.hoursThursday, 4));
+            Row.Cells.Add(MakeTableCell(Entry.hoursFirday, 4));
+            Row.Cells.Add(MakeTableCell(Entry.hoursSaturday, 4));
+            Row.Cells.Add(MakeTableCell(Entry.hoursSunday, 4));
+            Row.Cells.Add(MakeTableCell(Entry.hoursMonday, 4));
+            Row.Cells.Add(MakeTableCell(Entry.hoursTuesday, 4));
+            Row.Cells.Add(MakeTableCell(Entry.comments, 50));
             Row.Cells.Add(DeleteCell);
 
             return Row;
         }
 
-        public TableCell MakeTableCell(string Text)
+        public TableCell MakeEmployeeCell(string Text, int MaxLength)
         {
             //This takes a string and puts it inside a textbox inside a tablecell
             TableCell cell = new TableCell();
             TextBox TB = new TextBox();
             TB.Text = Text;
+            TB.MaxLength = MaxLength;
+            cell.Controls.Add(TB);
+
+            AutoCompleteExtender ACE = new AutoCompleteExtender();
+            ACE.TargetControlID = TB.ID;
+            ACE.ServiceMethod = "TBL.GetEmployees";
+
+            return cell;
+        }
+
+        public TableCell MakeTableCell(string Text, int MaxLength)
+        {
+            //This takes a string and puts it inside a textbox inside a tablecell
+            TableCell cell = new TableCell();
+            TextBox TB = new TextBox();
+            TB.Text = Text;
+            TB.MaxLength = MaxLength;
             cell.Controls.Add(TB);
 
             return cell;
@@ -192,8 +257,22 @@ namespace PFWorkTimesheet.Timesheet
                 //Save changes, Delete Timesheet, Refreshpage
                 SaveAllChanges();
                 TBL.DeleteTimesheetEntry(btn.CommandArgument.ToString()); //CommandArgument = Timesheet EntryID
+                var nameValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+                nameValues.Set("MESSAGE", "Row Deleted");
+                string url = Request.Url.AbsolutePath;
+                string updatedQueryString = "?" + nameValues.ToString();
+                Response.Redirect(url + updatedQueryString);
                 Response.Redirect(Request.RawUrl);
             }
+        }
+
+        [System.Web.Services.WebMethod]
+        [System.Web.Script.Services.ScriptMethod]
+        public string[] GetJobsites(string prefixText, int count, string contextKey)
+        {
+            //string[] Jobsites = TBL.GetJobsites();
+            string[] Jobsites = { "fyshwick", "hotdog stand", "this is dummy data", "fyshstick" };
+            return (from j in Jobsites where j.StartsWith(prefixText, StringComparison.CurrentCultureIgnoreCase) select j).Take(count).ToArray();             
         }
     }
 }

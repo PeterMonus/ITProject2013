@@ -19,8 +19,14 @@ namespace TimesheetBusiness
         public void SendEmail(TimesheetObject Timesheet)
         {
 
+            //Build the body of the email
             string EmailBody =
                 @"<table border=""1"">
+
+                <tr>
+                <td>TimesheetID: </td>
+                <td>" + Timesheet.timesheetID + @"</td>
+                </tr>
 
                 <tr>
                 <td>Foreman: </td>
@@ -33,7 +39,7 @@ namespace TimesheetBusiness
                 </tr>
 
                 <tr>
-                <td>Sumbitted On: </td>
+                <td>Submitted On: </td>
                 <td>" + Timesheet.submitted + @"</td>
                 </tr>
 
@@ -85,7 +91,20 @@ namespace TimesheetBusiness
 
             EmailBody += @"</table>";
 
-            MailMessage objMail = new MailMessage(ConfigurationManager.AppSettings["FromEmailAddress"], ConfigurationManager.AppSettings["ToEmailAddress"], "Timesheeting: New Timesheet From " + Timesheet.foremanID , EmailBody);
+            //create the message
+            MailMessage objMail = new MailMessage();
+
+            string[] toEmails = ConfigurationManager.AppSettings["ToEmailAddress"].Split(',');
+
+            foreach (string email in toEmails)
+            {
+                objMail.To.Add(email);
+            }
+
+            objMail.From = new MailAddress(ConfigurationManager.AppSettings["FromEmailAddress"]);
+            objMail.Subject = "Timesheeting: New Timesheet From " + Timesheet.foremanID;
+            objMail.Body = EmailBody;
+
             objMail.IsBodyHtml = true;
             NetworkCredential objNC = new NetworkCredential(ConfigurationManager.AppSettings["EmailUsername"], ConfigurationManager.AppSettings["EmailPassword"]);
             SmtpClient objsmtp = new SmtpClient(ConfigurationManager.AppSettings["EmailSMTPServer"], int.Parse(ConfigurationManager.AppSettings["EmailServerPort"]));

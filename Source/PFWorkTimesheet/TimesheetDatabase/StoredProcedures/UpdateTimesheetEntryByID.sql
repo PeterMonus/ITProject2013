@@ -22,7 +22,7 @@ BEGIN
 		sHoursWednesday=@HoursWednesday,
 		sHoursThursday=@HoursThursday,
 		sHoursFriday=@HoursFriday,
-		sHoursSaturday=@HoursMonday,
+		sHoursSaturday=@HoursSaturday,
 		sHoursSunday=@HoursSunday,
 		sHoursMonday=@HoursMonday,
 		sHoursTuesday=@HoursTuesday,

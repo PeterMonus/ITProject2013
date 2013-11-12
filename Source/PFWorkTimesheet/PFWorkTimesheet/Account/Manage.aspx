@@ -119,8 +119,5 @@
                 </tr>
             </ItemTemplate>
         </asp:ListView>
-
-        <h3>Add an external login</h3>
-        <uc:OpenAuthProviders runat="server" ReturnUrl="~/Account/Manage.aspx" />
     </section>
 </asp:Content>

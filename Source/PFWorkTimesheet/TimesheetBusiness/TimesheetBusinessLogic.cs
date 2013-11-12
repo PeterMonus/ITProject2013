@@ -38,10 +38,18 @@ namespace TimesheetBusiness
         /// Return: string list of employees: Firstname Lastname
         /// </para>
         /// </summary>
-        public List<string> GetEmployees()
+        public string[] GetEmployees(string prefixText, int count, string contextKey)
         {
-            List<string> Employees = LDA.GetEmployeeList();
-            return Employees;
+            try
+            {
+                string[] Employees = LDA.GetEmployeeList().ToArray();
+                return (from e in Employees where e.StartsWith(prefixText, StringComparison.CurrentCultureIgnoreCase) select e).Take(count).ToArray(); 
+            }
+            catch
+            {
+                string[] Employees = { "Jimmy", "John", "Jack" };
+                return Employees;
+            }
         }
 
         /// <summary>GetJobsites
@@ -51,9 +59,9 @@ namespace TimesheetBusiness
         /// Return: string list of jobsites
         /// </para>
         /// </summary>
-        public List<string> GetJobsites()
+        public string[] GetJobsites()
         {
-            List<string> Jobsites = LDA.GetJobsiteList();
+            string[] Jobsites = LDA.GetEmployeeList().ToArray();
             return Jobsites;
         }
 
