@@ -45,18 +45,16 @@ namespace PFWorkTimesheet.Timesheet
                         //Timesheet was found and info was returned
                         else
                         {
-                            if (!IsPostBack)
-                            {
-                                //Displays all the UI controls
-                                TableTimesheetInfo.Visible = true;
-                                TableTimesheet.Visible = true;
+                            
+                            //Displays all the UI controls
+                            TableTimesheetInfo.Visible = true;
+                            TableTimesheet.Visible = true;
 
-                                TableTimesheet.Visible = true;
-                                Button_Submit.Visible = true;
-                                Button_NewRow.Visible = true;
-                                Button_Save.Visible = true;
-                                
-                            }
+                            TableTimesheet.Visible = true;
+                            Button_Submit.Visible = true;
+                            Button_NewRow.Visible = true;
+                            Button_Save.Visible = true;
+
                             //Message box
                             MessageLabel.Text = Request.QueryString["MESSAGE"];
 
@@ -68,13 +66,14 @@ namespace PFWorkTimesheet.Timesheet
 
                             //Fill jobsite combobox with jobsite
                             //TextBox_Jobsite.Items.AddRange(TBL.GetJobsites().Select(s => new ListItem(s)).ToArray());
+                            if (!IsPostBack)
+                            {
+                                Label_Week.Text = Timesheet.weekEnding.Split(' ')[0];
+                                Textbox_Subcontractor.Text = Timesheet.subcontractor;
+                                TextBox_Jobsite.Text = Timesheet.jobsite;
 
-                            Label_Week.Text = Timesheet.weekEnding.Split(' ')[0];
-                            Textbox_Subcontractor.Text = Timesheet.subcontractor;
-                            TextBox_Jobsite.Text = Timesheet.jobsite;
-
-                            TitleLabel.Text = "Ending Tuesday, " + Timesheet.weekEnding.Split(' ')[0];
-
+                                TitleLabel.Text = "Ending Tuesday, " + Timesheet.weekEnding.Split(' ')[0];                                
+                            }
                             //Add row for each timesheet entry
                             foreach (TimesheetEntry TE in Timesheet.Entries)
                             {
@@ -207,13 +206,13 @@ namespace PFWorkTimesheet.Timesheet
             //Each column in the row has a textbox with the relevant data
             Row.Cells.Add(MakeEmployeeCell(Entry.employeeName, 50));
             Row.Cells.Add(MakeTableCell(Entry.employeeType, 1));
-            Row.Cells.Add(MakeTableCell(Entry.hoursWednesday, 4));
-            Row.Cells.Add(MakeTableCell(Entry.hoursThursday, 4));
-            Row.Cells.Add(MakeTableCell(Entry.hoursFirday, 4));
-            Row.Cells.Add(MakeTableCell(Entry.hoursSaturday, 4));
-            Row.Cells.Add(MakeTableCell(Entry.hoursSunday, 4));
-            Row.Cells.Add(MakeTableCell(Entry.hoursMonday, 4));
-            Row.Cells.Add(MakeTableCell(Entry.hoursTuesday, 4));
+            Row.Cells.Add(MakeTableCell(Entry.hoursWednesday, 5));
+            Row.Cells.Add(MakeTableCell(Entry.hoursThursday, 5));
+            Row.Cells.Add(MakeTableCell(Entry.hoursFirday, 5));
+            Row.Cells.Add(MakeTableCell(Entry.hoursSaturday, 5));
+            Row.Cells.Add(MakeTableCell(Entry.hoursSunday, 5));
+            Row.Cells.Add(MakeTableCell(Entry.hoursMonday, 5));
+            Row.Cells.Add(MakeTableCell(Entry.hoursTuesday, 5));
             Row.Cells.Add(MakeTableCell(Entry.comments, 50));
             Row.Cells.Add(DeleteCell);
 
